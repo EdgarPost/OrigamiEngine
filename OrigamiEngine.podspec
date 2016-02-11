@@ -10,11 +10,12 @@ Pod::Spec.new do |s|
   s.requires_arc          = false
   s.ios.deployment_target = '5.0'
   s.osx.deployment_target = '10.7'
-  s.tvos.deployment_target = '9.1'
+  s.tvos.deployment_target = '9.0'
 
   s.subspec 'Core' do |core|
       core.source_files          = 'OrigamiEngine/*.{h,m}', 'OrigamiEngine/Plugins/{CoreAudio,Cue,File,HTTP,M3U}*.{h,m}'
       core.ios.frameworks        = 'AudioToolbox', 'AVFoundation'
+      core.tvos.frameworks        = 'AudioToolbox', 'AVFoundation'
       core.osx.frameworks        = 'AudioToolbox', 'AVFoundation', 'AudioUnit'
   end
 
