@@ -10,6 +10,7 @@ Pod::Spec.new do |s|
   s.requires_arc          = false
   s.ios.deployment_target = '5.0'
   s.osx.deployment_target = '10.7'
+  s.tvos.deployment_target = '9.0'
 
   s.subspec 'Core' do |core|
       core.source_files          = 'OrigamiEngine/*.{h,m}', 'OrigamiEngine/Plugins/{CoreAudio,Cue,File,HTTP,M3U}*.{h,m}'
@@ -25,6 +26,9 @@ Pod::Spec.new do |s|
 
       flac.ios.preserve_paths    = 'Audio-Frameworks/bin/flac/FLAC.framework'
       flac.ios.xcconfig          = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/OrigamiEngine/Audio-Frameworks/bin/flac/"' }
+
+      flac.tvos.preserve_paths    = 'Audio-Frameworks/bin/flac/FLAC.framework'
+      flac.tvos.xcconfig          = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/OrigamiEngine/Audio-Frameworks/bin/flac/"' }
 
       flac.osx.preserve_paths    = 'Audio-Frameworks/bin/flac/Flac_OSX/FLAC.framework'
       flac.osx.xcconfig          = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/OrigamiEngine/Audio-Frameworks/bin/flac/FLAC_OSX"' }
@@ -43,6 +47,23 @@ Pod::Spec.new do |s|
           'Audio-Frameworks/bin/opus/include',
       ]
       opus.ios.xcconfig          = {
+          'FRAMEWORK_SEARCH_PATHS' => [
+              '"$(SDKROOT)/Developer/Library/Frameworks"',
+              '"$(DEVELOPER_LIBRARY_DIR)/Frameworks"',
+              '"$(PODS_ROOT)/OrigamiEngine/Audio-Frameworks/bin/ogg/"',
+              '"$(PODS_ROOT)/OrigamiEngine/Audio-Frameworks/bin/opus/"',
+              '"$(PODS_ROOT)/OrigamiEngine/Audio-Frameworks/bin/opusfile/"'
+          ].join(' '),
+          'HEADER_SEARCH_PATHS' => '"$(PODS_ROOT)/OrigamiEngine/Audio-Frameworks/bin/opus/include"'
+      }
+
+      opus.tvos.preserve_paths    = [
+          'Audio-Frameworks/bin/ogg/Ogg.framework',
+          'Audio-Frameworks/bin/opus/Opus.framework',
+          'Audio-Frameworks/bin/opusfile/OpusFile.framework',
+          'Audio-Frameworks/bin/opus/include',
+      ]
+      opus.tvos.xcconfig          = {
           'FRAMEWORK_SEARCH_PATHS' => [
               '"$(SDKROOT)/Developer/Library/Frameworks"',
               '"$(DEVELOPER_LIBRARY_DIR)/Frameworks"',
